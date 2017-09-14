@@ -1,3 +1,3 @@
 $('#submit-btn').on('click', () => {
-	console.log('tits hit')
+	console.log('tits')
 })

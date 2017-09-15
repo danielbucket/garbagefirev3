@@ -7,15 +7,16 @@ const mapItemStateOptionsToPage = item => {
 
 
 
-const mapGarageItemsToPage = data => {
-	$('#garageItems').append(
+const mapGarageItemsToPage = data => {	
+	$('.table').append(
 		`
-	<div class="garageItemCard">
-		<p class="garageItemName garageDetail">${data.name}</p>
-		<p class="garageItemReason garageDetail">${data.excuse}<p>
-		<p class="garageItemCondition garageDetail">${data.item_state_id}</p>
-		<button id="deleteBtn" class="deleteButton">Delete</button>
-	</div>
+		<div class="card">
+			<p class="description">${data.id}</p> 
+			<p class="description">${data.name}</p>
+			<p class="description">${data.excuse}<p>
+			<p class="description">${data.item_state_id}</p>
+			<p class="description" id="deleteBtn">Delete</p>
+		</div>
 		`
 		)
 }
@@ -31,6 +32,7 @@ const fetchCondition = item => {
 		fetch(`/api/v1/itemstate/${id}`)
 		.then(resp => resp.json())
 		.then(list => {
+
 			printGarageItems(
 				Object.assign(card, {item_state_id:list.data[0].cleanliness})
 				)

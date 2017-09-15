@@ -7,45 +7,32 @@ body {
 }
 
 #submit-btn {
+
 }
 
-.newItemInput {
-	width: 200px;
+.table {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
-.listContainer {
+.card {
+	width: 90%;
 	border: 1px solid red;
-	margin-top: 10px;
-}
-
-.columnHeader {
-	background-color: #fff;
-}
-
-.garageitemsDisplay {
 	display: flex;
 	flex-direction: row;
-	flex-wrap: wrap;
+	justify-content: space-evenly;
 }
 
-.garageItemCard {
-	display: flex;
-	flex-direction: row;
-}
-
-.garageDetail {
-	width: 200px;
-	border: 1px solid #f2f2f2;
+.title, .description {
+	width: 20%;
 	margin: 0;
+	text-align: center;
 }
 
-.deleteButton {
-	display: inline;
-	border: 1px solid #f2f2f2;
-}
 
-#addNewSection {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
+
+
+
+
+

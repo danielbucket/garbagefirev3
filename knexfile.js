@@ -4,6 +4,15 @@ module.exports = {
     connection: 'postgres://localhost/garbagebin',
     useNullAsDefault: true
   },
+  
+  production: {
+    client: 'pg',
+    connection: process.env.DATABASE_URL + `?ssl=true`,
+    useNullAsDefault: true,
+    migrations: {
+      directory: './db/migrations'
+    }
+  },
 
   test: {
     client: 'pg',

@@ -63,11 +63,11 @@ const populateGarage = () => {
 
 
 $('.conditionOption').on('click', () => {
-	console.log('tits')
+	console.log('hit')
 })
 
 $('#submitBtn').on('click', () => {
-	console.log('tits')
+	console.log('hit')
 })
 
 

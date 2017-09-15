@@ -53,7 +53,7 @@ app.get('/api/v1/items', (req,res) => {
 // POST TO ITEMS
 app.post('/api/v1/items', (req,res) => {
 	const newItem = req.body
-
+	console.log('hit')
 	db('items').insert(newItem, '*')
 	.then(newData => res.status(200).json({ newData }))
 	.catch(error => res.status(500).json({ data }))

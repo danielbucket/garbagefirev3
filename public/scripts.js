@@ -5,9 +5,7 @@ const mapItemStateOptionsToPage = item => {
 			)
 }
 
-
-
-const mapGarageItemsToPage = data => {	
+const mapGarageItemsToPage = data => {
 	$('#table').append(
 		`
 		<div class="card">
@@ -22,7 +20,7 @@ const mapGarageItemsToPage = data => {
 }
 
 const printGarageItems = data => {
-		mapGarageItemsToPage(data)
+	mapGarageItemsToPage(data)
 }
 
 const fetchCondition = item => {
@@ -32,7 +30,6 @@ const fetchCondition = item => {
 		fetch(`/api/v1/itemstate/${id}`)
 		.then(resp => resp.json())
 		.then(list => {
-
 			printGarageItems(
 				Object.assign(card, {item_state_id:list.data[0].cleanliness})
 				)
@@ -42,8 +39,7 @@ const fetchCondition = item => {
 }
 
 const populateGarage = () => {
-
-	fetch('/api/v1/items')
+	fetch('/api/v1/items/')
 	.then(resp => resp.json())
 	.then(returnValue => {
 		fetchCondition(returnValue)
@@ -51,12 +47,25 @@ const populateGarage = () => {
 	.catch(error => console.log(error))
 }
 
-$('.conditionOption').on('click', () => {
-	console.log('hit')
-})
+const postNewGarageItem = newObj => {
+	fetch('/api/v1/items/', {
+		method: "POST",
+		body: JSON.stringify(newObj),
+		headers: { "Content-Type": "application/json"}
+	})
+	.then(resp => resp.json(resp))
+	.then(data => {
+		$('#table').empty()
+		populateGarage()
+	})
+}
 
-$('#submitBtn').on('click', function(e) {
-	console.log('hit', e)
+$('#submitBtn').on('click', () => {
+	const item = $('#newItem').val()
+	const reason = $('#newReason').val()
+	const condition = $('#condition option:selected')[0].id
+
+	postNewGarageItem({ name:item, excuse:reason, item_state_id:condition })
 })
 
 $('#deleteBtn').on('click', function(e) {

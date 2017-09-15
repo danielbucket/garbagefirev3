@@ -4,7 +4,18 @@
 }
 
 body {
-	background-color: rgba(158, 158, 158, .7)
+	background-color: rgba(158, 158, 158, .7);
+	max-height: 600px;
+}
+
+.closeDoor {
+	height: 600px;
+	background-image: url(); 
+	border: 1px solid red;
+}
+
+.hidden {
+	display: none;
 }
 
 #submit-btn {
@@ -39,7 +50,6 @@ body {
 .saved {
 	width: 100%;	
 	margin: 0 auto;
-	/*border: 1px solid #fff;*/
 }
 
 .card {
@@ -81,7 +91,6 @@ input {
 #deleteBtn:hover {
  border: 1px solid red;
 }
-
 
 
 

@@ -6,26 +6,34 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 </head>
 <body>
-	<div class="table">
-		<div class="card">
-			<p class="title headerTitle" class="card">Add To The Horde =></p>
-			<input id="newItem" class="title headerTitle" placeholder="What it is" name="input"/>
-			<input id="newReason" class="title headerTitle" placeholder="Why has it" name="input"/>
-			<select id="condition" class="select headerTitle">
-				<option id="1">Sparkling</option>
-				<option id="2">Dusty</option>
-				<option id="3">Rancid</option>
-			</select>
-			<button id="submitBtn" class="button headerTitle" class="title">Submit</button>
-		</div>
-	</div>
-	<div id="table" class="table saved">
-		<div class="card header">
-			<p class="title">#<p>
-			<p class="title">What<p>
-			<p class="title">Reason<p>
-			<p class="title">Condition<p>
-			<p class="title">Action</p>
+
+	<div id="toggleDoor">See whats inside</div>
+	<div id="closedDoor" class="closeDoor">
+
+		<div id="garage" class="hidden">
+			<div class="table">
+				<div class="card">
+					<p class="title headerTitle" class="card">Add To The Horde =></p>
+					<input id="newItem" class="title headerTitle" placeholder="What it is" name="input"/>
+					<input id="newReason" class="title headerTitle" placeholder="Why has it" name="input"/>
+					<select id="condition" class="select headerTitle">
+						<option id="1">Sparkling</option>
+						<option id="2">Dusty</option>
+						<option id="3">Rancid</option>
+					</select>
+					<button id="submitBtn" class="button headerTitle" class="title">Submit</button>
+				</div>
+			</div>
+
+			<div id="table" class="table saved">
+				<div class="card header">
+					<p class="title">#<p>
+					<p class="title">What<p>
+					<p class="title">Reason<p>
+					<p class="title">Condition<p>
+					<p class="title">Action</p>
+				</div>
+			</div>
 		</div>
 	</div>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

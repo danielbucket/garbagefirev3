@@ -60,6 +60,11 @@ const postNewGarageItem = newObj => {
 	})
 }
 
+$('#toggleDoor').on('click', () => {
+	$('#garage').toggleClass('hidden')
+	$('#closedDoor').toggleClass('closeDoor')
+})
+
 $('#submitBtn').on('click', () => {
 	const item = $('#newItem').val()
 	const reason = $('#newReason').val()

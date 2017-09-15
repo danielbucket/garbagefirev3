@@ -17,6 +17,9 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname + '/../public/index.html'))
 })
 
+
+
+
 // DELETE ITEM FROM DB
 app.delete('/api/v1/items/destroy', (req, res) => {
 	const id = req.body.id;
@@ -53,7 +56,7 @@ app.get('/api/v1/items', (req,res) => {
 // POST TO ITEMS
 app.post('/api/v1/items', (req,res) => {
 	const newItem = req.body
-	console.log('hit')
+
 	db('items').insert(newItem, '*')
 	.then(newData => res.status(200).json({ newData }))
 	.catch(error => res.status(500).json({ data }))
@@ -105,3 +108,5 @@ app.patch('/api/v1/items', (req,res) => {
 app.listen(app.get('port'), () => {
 	console.log(`app is listening on port: ${app.get('port')}` )
 })
+
+module.exports = app

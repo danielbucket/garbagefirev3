@@ -3,7 +3,7 @@
 }
 
 body {
-	background-color: #99978e
+	background-color: rgba(158, 158, 158, .7)
 }
 
 #submit-btn {
@@ -11,6 +11,15 @@ body {
 
 .newItemInput {
 	width: 200px;
+}
+
+.listContainer {
+	border: 1px solid red;
+	margin-top: 10px;
+}
+
+.columnHeader {
+	background-color: #fff;
 }
 
 .garageitemsDisplay {
@@ -26,6 +35,12 @@ body {
 
 .garageDetail {
 	width: 200px;
+	border: 1px solid #f2f2f2;
+	margin: 0;
+}
+
+.deleteButton {
+	display: inline;
 	border: 1px solid #f2f2f2;
 }
 

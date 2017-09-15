@@ -14,6 +14,7 @@ const mapGarageItemsToPage = data => {
 		<p class="garageItemName garageDetail">${data.name}</p>
 		<p class="garageItemReason garageDetail">${data.excuse}<p>
 		<p class="garageItemCondition garageDetail">${data.item_state_id}</p>
+		<button id="deleteBtn" class="deleteButton">Delete</button>
 	</div>
 		`
 		)
@@ -48,13 +49,16 @@ const populateGarage = () => {
 	.catch(error => console.log(error))
 }
 
-
 $('.conditionOption').on('click', () => {
 	console.log('hit')
 })
 
-$('#submitBtn').on('click', () => {
-	console.log('hit')
+$('#submitBtn').on('click', function(e) {
+	console.log('hit', e)
+})
+
+$('#deleteBtn').on('click', function(e) {
+	console.log('hit', e)
 })
 
 

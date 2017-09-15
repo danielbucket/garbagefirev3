@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 #submit-btn {
 	border: 1px solid red;
 }

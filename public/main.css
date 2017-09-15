@@ -2,6 +2,35 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: #99978e
+}
+
 #submit-btn {
-	border: 1px solid red;
+}
+
+.newItemInput {
+	width: 200px;
+}
+
+.garageitemsDisplay {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.garageItemCard {
+	display: flex;
+	flex-direction: row;
+}
+
+.garageDetail {
+	width: 200px;
+	border: 1px solid #f2f2f2;
+}
+
+#addNewSection {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
 }

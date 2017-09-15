@@ -7,19 +7,19 @@
 <body>
 	<div>Garbage List</div>
 
- <section>
- 	<input id="newItemInput" type="text" name="" placeholder="what is the thing?">
- 	<input id="newItemInput" type="text" name="" placeholder="why is it here?">
- 	<button id="submitBtn">Submit</button>
-		<div id="conditions"></div>
-
+ <section id="addNewSection">
+ 		<input id="newItemInput" class="newItemInput" type="text" placeholder="what is the thing?">
+ 		<input id="newItemInput" class="newItemInput"
+ 		type="text" placeholder="why is it here?">
+ 		<input id="1" class="conditionOption" type="radio">Sparkling</input>
+ 		<input id="2" class="conditionOption" type="radio">Dusty</input>
+ 		<input id="3" class="conditionOption" type="radio">Rancid</input>
+ 		<button id="submitBtn">Submit</button>
  </section>
+
  <section>
- 	<div id="garageItems"></div>
- </section>
-
-
-
+ 		<div id="garageItems" class="garageItemsDisplay"></div>
+	</section>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts.js"></script>

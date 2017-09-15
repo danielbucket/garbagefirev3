@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
@@ -38,19 +39,22 @@ body {
 .saved {
 	width: 100%;	
 	margin: 0 auto;
+	/*border: 1px solid #fff;*/
 }
 
 .card {
 	width: 90%;
+	height: 24px;
 	display: flex;
 	flex-direction: row;
 	margin: 0 auto;
+	border-bottom: .75px solid #fff;
 }
 
 .headerTitle {
-	border: 1px solid orange;
 	width: 20%;
-	background-color: #d5d5d5;
+	background-color: #fff;
+
 }
 
 .title, .description {
@@ -62,7 +66,21 @@ body {
 	margin: 0 auto;
 }
 
+input {
+	border: none;
+}
 
+.select {
+	border-radius: 0;
+}
+
+.button {
+	border: none;
+}
+
+#deleteBtn:hover {
+ border: 1px solid red;
+}
 
 
 

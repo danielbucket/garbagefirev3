@@ -15,7 +15,7 @@ const mapGarageItemsToPage = data => {
 			<p class="description">${data.name}</p>
 			<p class="description">${data.excuse}<p>
 			<p class="description">${data.item_state_id}</p>
-			<p class="description" id="deleteBtn">Delete</p>
+			<button class="description button" id="deleteBtn">Delete</button>
 		</div>
 		`
 		)

@@ -7,7 +7,26 @@ body {
 }
 
 #submit-btn {
+	border: none;
+}
 
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	width: 90%;
+	background-color: #fff;
+	border: 1px solid #f2f2f2;
+}
+
+.header, .table {
+	width: 100%;
+}
+
+.column-header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 .table {
@@ -16,20 +35,32 @@ body {
 	justify-content: space-evenly;
 }
 
+.saved {
+	width: 100%;	
+	margin: 0 auto;
+}
+
 .card {
 	width: 90%;
-	border: 1px solid red;
 	display: flex;
 	flex-direction: row;
-	justify-content: space-evenly;
+	margin: 0 auto;
+}
+
+.headerTitle {
+	border: 1px solid orange;
+	width: 20%;
+	background-color: #d5d5d5;
 }
 
 .title, .description {
 	width: 20%;
 	margin: 0;
-	text-align: center;
 }
 
+.header {
+	margin: 0 auto;
+}
 
 
 

@@ -8,7 +8,7 @@ const mapItemStateOptionsToPage = item => {
 
 
 const mapGarageItemsToPage = data => {	
-	$('.table').append(
+	$('#table').append(
 		`
 		<div class="card">
 			<p class="description">${data.id}</p> 

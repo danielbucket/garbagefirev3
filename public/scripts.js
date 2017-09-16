@@ -8,10 +8,10 @@ const mapItemStateOptionsToPage = item => {
 const mapGarageItemsToPage = data => {
 	$('#table').append(
 		`
-		<div class="card">
+		<div id=${data.id} class="card">
 			<p class="description">${data.id}</p> 
 			<p class="description">${data.name}</p>
-			<p class="description">${data.excuse}<p>
+			<p class="description overflow">${data.excuse}<p>
 			<p class="description">${data.item_state_id}</p>
 			<button class="description button" id="deleteBtn">Delete</button>
 		</div>
@@ -31,7 +31,7 @@ const fetchCondition = item => {
 		.then(resp => resp.json())
 		.then(list => {
 			printGarageItems(
-				Object.assign(card, {item_state_id:list.data[0].cleanliness})
+				Object.assign(card, { item_state_id:list.stateID[0].cleanliness })
 				)
 		})
 		.catch(error => console.log(error))
@@ -42,6 +42,7 @@ const populateGarage = () => {
 	fetch('/api/v1/items/')
 	.then(resp => resp.json())
 	.then(returnValue => {
+		console.log('returnValue', returnValue)
 		fetchCondition(returnValue)
 	})
 	.catch(error => console.log(error))
@@ -60,6 +61,15 @@ const postNewGarageItem = newObj => {
 	})
 }
 
+const deleteCard = id => {
+	fetch('/api/v1/items/destroy', {
+		method: "DELETE",
+		body: JSON.stringify({ id }),
+		headers: { "Content-Type":"application/json" }
+	})
+	.catch(error => {console.log(error)})
+}
+
 $('#toggleDoor').on('click', () => {
 	$('#garage').toggleClass('hidden')
 	$('#closedDoor').toggleClass('closeDoor')
@@ -73,8 +83,11 @@ $('#submitBtn').on('click', () => {
 	postNewGarageItem({ name:item, excuse:reason, item_state_id:condition })
 })
 
-$('#deleteBtn').on('click', function(e) {
-	console.log('hit', e)
+$('#table').on('click', '#deleteBtn', function() {
+	const id = $(this).parents('.card').attr('id')
+	// console.log('hit: ', id)
+	deleteCard(id)
+	$(this).parents().remove('.card')
 })
 
 

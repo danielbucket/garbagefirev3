@@ -22,13 +22,13 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: process.env.DATABASE_URL || 'postgres://localhost/garbagebin',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/garbagebintest',
     useNullAsDefault: true,
     migrations: {
       directory: './db/migrations'
     },
     seeds: {
-      directory: './db/seeds/dev'
+      directory: './db/seeds/test'
     }
   }
 };

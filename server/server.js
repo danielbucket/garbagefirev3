@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 app.delete('/api/v1/items/destroy', (req, res) => {
 	const id = req.body.id;
 	db('items').where('id', id).del()
-	.then(() => res.status(202).json({ destroyed:`${id} has been deleted`}))
+	.then(() => res.status(202).json({ destroyed:`${id} has been deleted`, id:id}))
 })
 
 // GET ITEMS_STATE
@@ -35,7 +35,7 @@ app.get('/api/v1/itemstate', (req,res) => {
 })
 
 // GET ITEMSTATE BY ID
-app.get('/api/v1/itemsstate/:id', (req,res) => {
+app.get('/api/v1/itemstate/:id', (req,res) => {
 	const id = req.params.id;
 
 	db('items_state').where('id', id).select('cleanliness')
@@ -43,7 +43,6 @@ app.get('/api/v1/itemsstate/:id', (req,res) => {
 		res.status(200).json({ stateID })
 	})
 })
-
 
 // GET ALL ITEMS
 app.get('/api/v1/items', (req,res) => {

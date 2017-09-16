@@ -1,11 +1,11 @@
-const chai 									= require('chai');
-const should 							= chai.should();
-const chaiHTTP 					= require('chai-http');
-const server 							= require('../server/server');
+const chai 					= require('chai');
+const should 				= chai.should();
+const chaiHTTP 		  = require('chai-http');
+const server 			  = require('../server/server');
 
-const environment 		= process.env.NODE_ENV || 'development';
+const environment 	= process.env.NODE_ENV || 'test';
 const configuration = require('../knexfile')[environment];
-const db 											= require('knex')(configuration);
+const db 						= require('knex')(configuration);
 
 chai.use(chaiHTTP);
 
@@ -22,11 +22,17 @@ describe('client routes', () => {
 })
 
 describe('server routes', () => {
-	  beforeEach(done => {
+  beforeEach(done => {
     db.migrate.latest()
     .then(() => db.seed.run())
     .then(() => done())
     .catch(error => console.log(error))
+  })
+
+  afterEach(done => {
+    db.migrate.rollback()
+    .then(() => done())
+    .then(error => console.log('Error: ',error))
   })
 
   it('POST api/v1/items', done => {
@@ -96,7 +102,7 @@ describe('server routes', () => {
 
   	it('GET itemstate by id 1', done => {
   		chai.request(server)
-  		.get('/api/v1/itemsstate/1')
+  		.get('/api/v1/itemstate/1')
   		.end((err,res) => {
   			res.should.be.json
   			res.should.have.status(200)
@@ -107,7 +113,7 @@ describe('server routes', () => {
 
   	it('GET itemstate by id 2', done => {
   		chai.request(server)
-  		.get('/api/v1/itemsstate/2')
+  		.get('/api/v1/itemstate/2')
   		.end((err,res) => {
   			res.should.be.json
   			res.should.have.status(200)
@@ -118,7 +124,7 @@ describe('server routes', () => {
 
   	it('GET itemstate by id 3', done => {
   		chai.request(server)
-  		.get('/api/v1/itemsstate/3')
+  		.get('/api/v1/itemstate/3')
   		.end((err,res) => {
   			res.should.be.json
   			res.should.have.status(200)

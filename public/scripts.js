@@ -71,8 +71,7 @@ const deleteCard = id => {
 }
 
 $('#toggleDoor').on('click', () => {
-	$('#garage').toggleClass('hidden')
-	$('#closedDoor').toggleClass('closeDoor')
+	$('#closedDoor').toggleClass('door', 'doorAction')
 })
 
 $('#submitBtn').on('click', () => {
@@ -85,7 +84,6 @@ $('#submitBtn').on('click', () => {
 
 $('#table').on('click', '#deleteBtn', function() {
 	const id = $(this).parents('.card').attr('id')
-	// console.log('hit: ', id)
 	deleteCard(id)
 	$(this).parents().remove('.card')
 })

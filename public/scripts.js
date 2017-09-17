@@ -12,7 +12,7 @@ const mapGarageItemsToPage = data => {
 			<p class="description">${data.id}</p> 
 			<p class="description">${data.name}</p>
 			<p class="description overflow">${data.excuse}<p>
-			<p class="description">${data.item_state_id}</p>
+			<p class="description">${data.item_state}</p>
 			<button class="description button" id="deleteBtn">Delete</button>
 		</div>
 		`
@@ -20,30 +20,14 @@ const mapGarageItemsToPage = data => {
 }
 
 const printGarageItems = data => {
-	mapGarageItemsToPage(data)
-}
-
-const fetchCondition = item => {
-	item.data.forEach(card => {
-		const id = card.item_state_id;
-
-		fetch(`/api/v1/itemstate/${id}`)
-		.then(resp => resp.json())
-		.then(list => {
-			printGarageItems(
-				Object.assign(card, { item_state_id:list.stateID[0].cleanliness })
-				)
-		})
-		.catch(error => console.log(error))
-	})
+	data.forEach(item => mapGarageItemsToPage(item))
 }
 
 const populateGarage = () => {
 	fetch('/api/v1/items/')
 	.then(resp => resp.json())
 	.then(returnValue => {
-		console.log('returnValue', returnValue)
-		fetchCondition(returnValue)
+		printGarageItems(returnValue.data)
 	})
 	.catch(error => console.log(error))
 }
@@ -55,9 +39,11 @@ const postNewGarageItem = newObj => {
 		headers: { "Content-Type": "application/json"}
 	})
 	.then(resp => resp.json(resp))
-	.then(data => {
+	.then(returnedObj => {
+		$('#newItem').empty()
+		$('#newReason').empty()
 		$('#table').empty()
-		populateGarage()
+		printGarageItems(returnedObj.data)
 	})
 }
 
@@ -70,6 +56,11 @@ const deleteCard = id => {
 	.catch(error => {console.log(error)})
 }
 
+
+
+
+//------> ACTIONS <------//
+
 $('#toggleDoor').on('click', () => {
 	$('#closedDoor').toggleClass('door', 'doorAction')
 })
@@ -79,7 +70,7 @@ $('#submitBtn').on('click', () => {
 	const reason = $('#newReason').val()
 	const condition = $('#condition option:selected')[0].id
 
-	postNewGarageItem({ name:item, excuse:reason, item_state_id:condition })
+	postNewGarageItem({ name:item,excuse:reason,item_state_id:condition })
 })
 
 $('#table').on('click', '#deleteBtn', function() {

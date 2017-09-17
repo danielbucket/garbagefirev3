@@ -20,19 +20,19 @@ const mapGarageItemsToPage = data => {
 }
 
 const printGarageItems = (data, sortOptions) => {
-
 	if(!sortOptions) {
 		sortOptions = { toSortBy:'itemId', sort:'id' }
 	}
-	let shartBy = sortOptions.sort
+
+	let sortCondition = sortOptions.sort
 
 	if( $(`#${sortOptions.toSortBy}`).hasClass('up') ) {
 		data = data.sort((a,b) => {
-			return a[shartBy] < b[shartBy]
+			return a[sortCondition] < b[sortCondition]
 		})
 	} else {
 		data = data.sort((a,b) => {
-			return a[shartBy] > b[shartBy]
+			return a[sortCondition] > b[sortCondition]
 		})
 	}
 
@@ -74,8 +74,6 @@ const deleteCard = id => {
 }
 
 const repackageToSort = toSortBy => {
-	console.log('at repackageToSort: ', toSortBy)
-
 	const itemIdArray = $('[id="garageItemId"]')
 	const somethingArray = []
 

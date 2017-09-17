@@ -25,7 +25,7 @@ body {
 	background-color: green;
 	border: 1px solid orange;
 
-	-webkit-transform: translateY(-600px);
+	-webkit-transform: translateY(-900px);
 }
 
 .doorAction {

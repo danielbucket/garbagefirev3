@@ -6,13 +6,13 @@ const mapItemStateOptionsToPage = item => {
 }
 
 const mapGarageItemsToPage = data => {
-	$('#table').append(
+	$('#tableCards').append(
 		`
-		<div id=${data.id} class="card">
-			<p class="description">${data.id}</p> 
-			<p class="description">${data.name}</p>
-			<p class="description overflow">${data.excuse}<p>
-			<p class="description">${data.item_state}</p>
+		<div id="item-${data.id}" class="card">
+			<p id="garageItemId" class="description">${data.id}</p> 
+			<p id="itemName" class="description">${data.name}</p>
+			<p id="itemExcuse" class="description overflow">${data.excuse}<p>
+			<p id="itemCondition" class="description">${data.item_state}</p>
 			<button class="description button" id="deleteBtn">Delete</button>
 		</div>
 		`
@@ -20,6 +20,19 @@ const mapGarageItemsToPage = data => {
 }
 
 const printGarageItems = data => {
+
+	console.log( $('#itemId').hasClass('up') )
+
+	if( $('#itemId').hasClass('up') ) {
+		data = data.sort((a,b) => {
+			return a.id < b.id
+		})
+	} else {
+		data = data.sort((a,b) => {
+			return a.id > b.id
+		})
+	}
+
 	data.forEach(item => mapGarageItemsToPage(item))
 }
 
@@ -27,6 +40,7 @@ const populateGarage = () => {
 	fetch('/api/v1/items/')
 	.then(resp => resp.json())
 	.then(returnValue => {
+		$('#tableCards').empty()
 		printGarageItems(returnValue.data)
 	})
 	.catch(error => console.log(error))
@@ -42,7 +56,7 @@ const postNewGarageItem = newObj => {
 	.then(returnedObj => {
 		$('#newItem').empty()
 		$('#newReason').empty()
-		$('#table').empty()
+		$('#tableCards').empty()
 		printGarageItems(returnedObj.data)
 	})
 }
@@ -67,16 +81,37 @@ $('#toggleDoor').on('click', () => {
 
 $('#submitBtn').on('click', () => {
 	const item = $('#newItem').val()
-	const reason = $('#newReason').val()
+	const excuse = $('#newReason').val()
 	const condition = $('#condition option:selected')[0].id
 
-	postNewGarageItem({ name:item,excuse:reason,item_state_id:condition })
+	postNewGarageItem({ name:item,excuse:excuse,item_state_id:condition })
 })
 
 $('#table').on('click', '#deleteBtn', function() {
 	const id = $(this).parents('.card').attr('id')
 	deleteCard(id)
 	$(this).parents().remove('.card')
+})
+
+$('#itemId').on('click', function() {
+	$('#itemId').toggleClass('up')
+	
+	const itemIdArray = $('[id="garageItemId"]')
+	const somethingArray = []
+
+	itemIdArray.each((i,item) => {
+		const block = $(`[id="item-${item.innerText}"]`)
+
+		const id = parseInt(block.find('#garageItemId').text())
+		const name = block.find('#itemName').text()
+		const excuse = block.find('#itemExcuse').text()
+		const condition = block.find('#itemCondition').text()
+
+		somethingArray.push({ id:id,name:name,excuse:excuse,item_state:condition })
+	})
+
+	$('#tableCards').empty()
+	printGarageItems(somethingArray)
 })
 
 

@@ -65,9 +65,10 @@ const postNewGarageItem = newObj => {
 }
 
 const deleteCard = id => {
+	const newId = id.slice(5,7)
 	fetch('/api/v1/items/destroy', {
 		method: "DELETE",
-		body: JSON.stringify({ id }),
+		body: JSON.stringify({ newId }),
 		headers: { "Content-Type":"application/json" }
 	})
 	.catch(error => {console.log(error)})

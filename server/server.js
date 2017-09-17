@@ -25,7 +25,8 @@ app.get('/', (req, res) => {
 
 // DELETE ITEM FROM DB
 app.delete('/api/v1/items/destroy', (req, res) => {
-	const id = req.body.id;
+	const id = req.body.newId;
+	
 	db('items').where('id', id)
 	.del()
 	.then(() => res.status(202).json({

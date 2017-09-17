@@ -19,17 +19,20 @@ const mapGarageItemsToPage = data => {
 		)
 }
 
-const printGarageItems = data => {
+const printGarageItems = (data, sortOptions) => {
 
-	console.log( $('#itemId').hasClass('up') )
+	if(!sortOptions) {
+		sortOptions = { toSortBy:'itemId', sort:'id' }
+	}
+	let shartBy = sortOptions.sort
 
-	if( $('#itemId').hasClass('up') ) {
+	if( $(`#${sortOptions.toSortBy}`).hasClass('up') ) {
 		data = data.sort((a,b) => {
-			return a.id < b.id
+			return a[shartBy] < b[shartBy]
 		})
 	} else {
 		data = data.sort((a,b) => {
-			return a.id > b.id
+			return a[shartBy] > b[shartBy]
 		})
 	}
 
@@ -70,6 +73,30 @@ const deleteCard = id => {
 	.catch(error => {console.log(error)})
 }
 
+const repackageToSort = toSortBy => {
+	console.log('at repackageToSort: ', toSortBy)
+
+	const itemIdArray = $('[id="garageItemId"]')
+	const somethingArray = []
+
+	itemIdArray.each((i,item) => {
+		const block = $(`[id="item-${item.innerText}"]`)
+
+		const id = parseInt(block.find('#garageItemId').text())
+		const name = block.find('#itemName').text()
+		const excuse = block.find('#itemExcuse').text()
+		const condition = block.find('#itemCondition').text()
+
+		somethingArray.push({ id:id,
+																								name:name,
+																								excuse:excuse,
+																								item_state:condition })
+
+		})
+			$('#tableCards').empty()
+			printGarageItems(somethingArray, toSortBy)
+	}
+
 
 
 
@@ -83,7 +110,6 @@ $('#submitBtn').on('click', () => {
 	const item = $('#newItem').val()
 	const excuse = $('#newReason').val()
 	const condition = $('#condition option:selected')[0].id
-
 	postNewGarageItem({ name:item,excuse:excuse,item_state_id:condition })
 })
 
@@ -93,27 +119,33 @@ $('#table').on('click', '#deleteBtn', function() {
 	$(this).parents().remove('.card')
 })
 
-$('#itemId').on('click', function() {
-	$('#itemId').toggleClass('up')
-	
-	const itemIdArray = $('[id="garageItemId"]')
-	const somethingArray = []
+$('#itemTitle').on('click', function() {
+	$('#itemTitle').toggleClass('up')
+	const toSortBy = $(this)[0].id
 
-	itemIdArray.each((i,item) => {
-		const block = $(`[id="item-${item.innerText}"]`)
-
-		const id = parseInt(block.find('#garageItemId').text())
-		const name = block.find('#itemName').text()
-		const excuse = block.find('#itemExcuse').text()
-		const condition = block.find('#itemCondition').text()
-
-		somethingArray.push({ id:id,name:name,excuse:excuse,item_state:condition })
-	})
-
-	$('#tableCards').empty()
-	printGarageItems(somethingArray)
+	repackageToSort({ toSortBy:toSortBy, sort:'name' })
 })
 
+$('#itemId').on('click', function() {
+	$('#itemId').toggleClass('up')
+	const toSortBy = $(this)[0].id
+
+	repackageToSort({ toSortBy:toSortBy, sort:'id' })
+})
+
+$('#itemReason').on('click', function() {
+	$('#itemReason').toggleClass('up')
+	const toSortBy = $(this)[0].id
+
+	repackageToSort({ toSortBy:toSortBy, sort:'excuse' })
+})
+
+$('#itemCondition').on('click', function() {
+	$('#itemCondtion').toggleClass('up')
+	const toSortBy = $(this)[0].id
+
+	repackageToSort({ toSortBy:toSortBy, sort:'item_state' })
+})
 
 $(document).ready(() => {
 	populateGarage()

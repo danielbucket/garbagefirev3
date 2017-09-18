@@ -89,7 +89,7 @@ const deleteCard = id => {
 	const newId = id.slice(5,7)
 	fetch('/api/v1/items/destroy', {
 		method: "DELETE",
-		body: JSON.stringify({ newId }),
+		body: JSON.stringify({ newId:newId }),
 		headers: { "Content-Type":"application/json" }
 	})
 	.catch(error => console.log(error) )

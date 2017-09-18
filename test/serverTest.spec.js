@@ -74,7 +74,7 @@ describe('server routes', () => {
   it('DELETE /api/v1/items/destroy', done => {
   	chai.request(server)
   	.delete('/api/v1/items/destroy')
-  	.send({id:2})
+  	.send({newId:2})
   	.end((err,res) => {
   		res.should.have.status(202)
   		res.should.be.json
@@ -149,15 +149,15 @@ describe('server routes', () => {
   		chai.request(server)
   		.post('/api/v1/items')
   		.send({
-    	"name": "poney",
-    	"excuse": "for the midget",
-    	"item_state_id": 1
+          "name": "poney",
+          "excuse": "for the midget",
+          "item_state_id": 1
 				})
 				.end((err,res) => {
 					res.should.have.status(200)
 					res.should.be.json
-					res.body.newData[0].excuse.should.equal('for the midget')
-					const id = res.body.newData[0].id
+					res.body.data[3].excuse.should.equal('for the midget')
+					const id = res.body.data[3].id
 
 	  		chai.request(server)
 	  		.put('/api/v1/items')
@@ -166,52 +166,48 @@ describe('server routes', () => {
 							"replaceWith":{
 								"name": "water slide",
 								"excuse": "because, just because",
+                "item_state": "dusty",
 								"item_state_id": 3
 							}
 					})
 				.end((err,res) => {
 					res.should.be.json
 					res.should.have.status(200)
-					res.body.data[0].excuse.should.equal('because, just because')
+					res.body.data[3].excuse.should.equal('because, just because')
 					done()
 				})
-				})
+			})
   	})
 
-it('PATCH api/v1/items', done => {
+it.only('PATCH api/v1/items', done => {
 
-  		chai.request(server)
-  		.post('/api/v1/items')
-  		.send({
+		chai.request(server)
+		.post('/api/v1/items')
+		.send({
     	"name": "chainsaw",
     	"excuse": "for cake cutting",
     	"item_state_id": 2
+			})
+			.end((err,res) => {
+				res.should.have.status(200)
+				res.should.be.json
+				res.body.data[3].name.should.equal('chainsaw')
+				const id = res.body.data[0].id
+
+  		chai.request(server)
+  		.patch('/api/v1/items')
+  		.send({
+					"id":`${id}`,
+					"updateWith":{
+						"name": "blender"
+					}
 				})
-				.end((err,res) => {
-					res.should.have.status(200)
-					res.should.be.json
-					res.body.newData[0].name.should.equal('chainsaw')
-					const id = res.body.newData[0].id
-
-	  		chai.request(server)
-	  		.patch('/api/v1/items')
-	  		.send({
-						"id":`${id}`,
-						"updateWith":{
-							"name": "blender"
-						}
-					})
-				.end((err,res) => {
-					res.should.be.json
-					res.should.have.status(200)
-					res.body.data[0].name.should.equal('blender')
-					done()
-				})
-				})
-  	})
-
-
-
-
-
+			.end((err,res) => {
+				res.should.be.json
+				res.should.have.status(200)
+				res.body.data[3].name.should.equal('blender')
+				done()
+			})
+		})
+	})
 })

@@ -38,6 +38,8 @@ const printQuantities = quantityObj => {
 }
 
 const printGarageItems = (data, sortOptions) => {
+	printQuantities(quantify(data))
+	console.log('data: ', data)
 	if(!sortOptions) {
 		sortOptions = { toSortBy:'itemId', sort:'id' }
 	}
@@ -53,7 +55,6 @@ const printGarageItems = (data, sortOptions) => {
 			return a[sortCondition] > b[sortCondition]
 		})
 	}
-	printQuantities(quantify(data))
 
 	data.forEach(item => mapGarageItemsToPage(item))
 }
@@ -63,7 +64,6 @@ const populateGarage = () => {
 	.then(resp => resp.json())
 	.then(returnValue => {
 		$('#tableCards').empty()
-		printQuantities(quantify(returnValue.data))
 		printGarageItems(returnValue.data)
 	})
 	.catch(error => console.log(error))
@@ -80,6 +80,7 @@ const postNewGarageItem = newObj => {
 		$('#newItem').empty()
 		$('#newReason').empty()
 		$('#tableCards').empty()
+
 		printGarageItems(returnedObj.data)
 	})
 }

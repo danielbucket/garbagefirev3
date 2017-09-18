@@ -99,7 +99,7 @@ app.route('/api/v1/items')
 	})
 
 	.post(getItemState, (req,res) => {
-		console.log(req.body)
+		
 		db('items').insert(req.body)
 		.then(newData => {
 			db('items').select('*')

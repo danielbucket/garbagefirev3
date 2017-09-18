@@ -37,32 +37,26 @@ const printQuantities = quantityObj => {
 	$('#rancidCountNum')[0].innerText = quantityObj.rancid
 }
 
-const sortingFunc = (data, sortOptions) => {
-	const sortedArray = []
+const printGarageItems = (data, sortOptions) => {
+	printQuantities(quantify(data))
 
-		if(!sortOptions) {
+	if(!sortOptions) {
 		sortOptions = { toSortBy:'itemId', sort:'id' }
 	}
 
 	let sortCondition = sortOptions.sort
 
-	if($(`#${sortOptions.toSortBy}`).hasClass('up')) {
+	if( $(`#${sortOptions.toSortBy}`).hasClass('up') ) {
 		data = data.sort((a,b) => {
-			a[sortCondition] < b[sortCondition] 
+			return a[sortCondition] < b[sortCondition]
 		})
 	} else {
 		data = data.sort((a,b) => {
-			a[sortCondition] > b[sortCondition]
+			return a[sortCondition] > b[sortCondition]
 		})
 	}
-	
-return data
-}
 
-const printGarageItems = (data, sortOptions) => {
-	printQuantities(quantify(data))
-	sortingFunc(data, sortOptions)
-	.forEach(item => mapGarageItemsToPage(item))
+	data.forEach(item => mapGarageItemsToPage(item))
 }
 
 const populateGarage = () => {

@@ -30,12 +30,6 @@ app.delete('/api/v1/items/destroy', (req,res) => {
 		db('items').select('*')
 		.then(data => res.status(200).json({ data }))
 	})
-
-	db('items').where('id', id)
-	.del()
-	.then(() => res.status(202).json({
-		destroyed:`${id} has been deleted`, id:id 
-	}))
 })
 
 // GET ITEMS_STATE

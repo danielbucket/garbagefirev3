@@ -12,10 +12,6 @@ const checkItemState = require('./serverMiddleware').checkItemState
 
 app.set('port', process.env.PORT || 3636)
 
-console.log('process.env.NODE_ENV: ', process.env.NODE_ENV)
-console.log('process.env.PORT: ', process.env.PORT)
-
-
 app.use(express.static(__dirname + '/../public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended:true }))

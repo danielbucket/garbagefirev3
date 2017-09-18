@@ -8,7 +8,6 @@ const configuration = require('../knexfile')[environment];
 const db = require('knex')(configuration);
 
 const getItemState = require('./serverMiddleware').getItemState;
-const checkItemState = require('./serverMiddleware').checkItemState;
 
 app.set('port', process.env.PORT || 3636);
 
@@ -79,8 +78,7 @@ app.route('/api/v1/items')
 
 			db('items').where('id', id)
 			.update(updateWith)
-			.then(() => {
-				db('items').select('*')
+			.then(() => {				db('items').select('*')
 				.then(data => res.status(200).json({ data }))
 			})
 	.catch(error => res.status(500).json({ error }))
@@ -101,6 +99,7 @@ app.route('/api/v1/items')
 	})
 
 	.post(getItemState, (req,res) => {
+		console.log(req.body)
 		db('items').insert(req.body)
 		.then(newData => {
 			db('items').select('*')

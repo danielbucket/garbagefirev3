@@ -46,7 +46,7 @@ describe('server routes', () => {
   	.end((err,res) => {
   		res.should.be.a('object')
   		res.should.have.status(200)
-  		res.body.newData[0].name.should.equal('poney')
+  		res.body.data[3].name.should.equal('poney')
   		done()
   	})
   })
@@ -82,8 +82,6 @@ describe('server routes', () => {
   		res.body.destroyed.should.equal('2 has been deleted')
   		done()
   	})
-
-  	
   })
 
   	it('GET item state', done => {
@@ -145,7 +143,6 @@ describe('server routes', () => {
   	})
 
   	it('PUT api/v1/items', done => {
-
   		chai.request(server)
   		.post('/api/v1/items')
   		.send({
@@ -179,8 +176,7 @@ describe('server routes', () => {
 			})
   	})
 
-it.only('PATCH api/v1/items', done => {
-
+it('PATCH api/v1/items', done => {
 		chai.request(server)
 		.post('/api/v1/items')
 		.send({

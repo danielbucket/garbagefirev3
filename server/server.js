@@ -12,16 +12,20 @@ const checkItemState = require('./serverMiddleware').checkItemState
 
 app.set('port', process.env.PORT || 3636)
 
+console.log('process.env.NODE_ENV: ', process.env.NODE_ENV)
+console.log('process.env.PORT: ', process.env.PORT)
+
+
 app.use(express.static(__dirname + '/../public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended:true }))
 
-app.get('/', (req, res) => {
+app.get('/', (req,res) => {
 	res.sendFile(path.join(__dirname + '/../public/index.html'))
 })
 
 // DELETE ITEM FROM DB
-app.delete('/api/v1/items/destroy', (req, res) => {
+app.delete('/api/v1/items/destroy', (req,res) => {
 	const id = req.body.newId;
 
 	db('items').where('id', id)
@@ -71,7 +75,7 @@ app.get('/api/v1/items/:name', (req,res) => {
 
 //------> API/V1/ITEMS <------//
 app.route('/api/v1/items')
-	.patch((req, res) => {
+	.patch((req,res) => {
 			const id = req.body.id;
 			const toUpdate = Object.keys(req.body.updateWith)[0];
 			const updateWith = req.body.updateWith;
@@ -112,7 +116,6 @@ app.route('/api/v1/items')
 		.then(data => res.status(200).json({ data }))
 		.catch(error => res.status(500).json({ error }))
 	})
-
 
 app.listen(app.get('port'), () => {
 	console.log(`app is listening on port: ${app.get('port')}` )

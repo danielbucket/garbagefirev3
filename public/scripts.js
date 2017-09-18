@@ -19,7 +19,26 @@ const mapGarageItemsToPage = data => {
 		)
 }
 
+const quantify = data => {
+	return	 quantities = data.reduce((newObj, curVal) => {
+		Object.keys(newObj).forEach(i => {
+			Object.keys(curVal).forEach(j => {
+				if(i === curVal[j]) {	newObj[i]++ }
+			})
+		})
+		return newObj
+	},{ itemsCount:data.length, sparkling:0, dusty:0, rancid:0 })
+}
+
+const printQuantities = quantityObj => {
+	$('#itemsCountNum')[0].innerText = quantityObj.itemsCount
+	$('#sparklyCountNum')[0].innerText = quantityObj.sparkling
+	$('#dustyCountNum')[0].innerText = quantityObj.dusty
+	$('#rancidCountNum')[0].innerText = quantityObj.rancid
+}
+
 const printGarageItems = (data, sortOptions) => {
+
 	if(!sortOptions) {
 		sortOptions = { toSortBy:'itemId', sort:'id' }
 	}
@@ -35,28 +54,9 @@ const printGarageItems = (data, sortOptions) => {
 			return a[sortCondition] > b[sortCondition]
 		})
 	}
+	printQuantities(quantify(data))
 
 	data.forEach(item => mapGarageItemsToPage(item))
-}
-
-const printQuantities = quantityObj => {
-	$('#itemsCountNum')[0].innerText = quantityObj.itemsCount
-	$('#sparklyCountNum')[0].innerText = quantityObj.sparkling
-	$('#dustyCountNum')[0].innerText = quantityObj.dusty
-	$('#rancidCountNum')[0].innerText = quantityObj.rancid
-}
-
-const quantify = data => {
-	return	 quantities = data.reduce((newObj, curVal) => {
-		Object.keys(newObj).forEach(i => {
-			Object.keys(curVal).forEach(j => {
-				if(i === curVal[j]) {
-					newObj[i]++ 
-				}
-			})
-		})
-		return newObj
-	},{ itemsCount:data.length, sparkling:0, dusty:0, rancid:0 })
 }
 
 const populateGarage = () => {

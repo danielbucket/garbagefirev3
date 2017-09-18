@@ -26,6 +26,13 @@ app.delete('/api/v1/items/destroy', (req,res) => {
 
 	db('items').where('id', id)
 	.del()
+	.then(() => {
+		db('items').select('*')
+		.then(data => res.status(200).json({ data }))
+	})
+
+	db('items').where('id', id)
+	.del()
 	.then(() => res.status(202).json({
 		destroyed:`${id} has been deleted`, id:id 
 	}))
@@ -84,6 +91,7 @@ app.route('/api/v1/items')
 			})
 	.catch(error => res.status(500).json({ error }))
 	})
+
 	.put((req,res) => {
 		const id = req.body.id
 		const newPut = req.body.replaceWith
@@ -97,6 +105,7 @@ app.route('/api/v1/items')
 		})
 		.catch(error => res.status(500).json({ error }))
 	})
+
 	.post(getItemState, (req,res) => {
 		db('items').insert(req.body)
 		.then(newData => {
@@ -106,6 +115,7 @@ app.route('/api/v1/items')
 		})
 		.catch(error => res.status(500).json({ error }))
 	})
+
 	.get((req,res) => {
 		db('items')
 		.select('*')

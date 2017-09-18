@@ -37,26 +37,32 @@ const printQuantities = quantityObj => {
 	$('#rancidCountNum')[0].innerText = quantityObj.rancid
 }
 
-const printGarageItems = (data, sortOptions) => {
-	printQuantities(quantify(data))
-	console.log('data: ', data)
-	if(!sortOptions) {
+const sortingFunc = (data, sortOptions) => {
+	const sortedArray = []
+
+		if(!sortOptions) {
 		sortOptions = { toSortBy:'itemId', sort:'id' }
 	}
 
 	let sortCondition = sortOptions.sort
 
-	if( $(`#${sortOptions.toSortBy}`).hasClass('up') ) {
+	if($(`#${sortOptions.toSortBy}`).hasClass('up')) {
 		data = data.sort((a,b) => {
-			return a[sortCondition] < b[sortCondition]
+			a[sortCondition] < b[sortCondition] 
 		})
 	} else {
 		data = data.sort((a,b) => {
-			return a[sortCondition] > b[sortCondition]
+			a[sortCondition] > b[sortCondition]
 		})
 	}
+	
+return data
+}
 
-	data.forEach(item => mapGarageItemsToPage(item))
+const printGarageItems = (data, sortOptions) => {
+	printQuantities(quantify(data))
+	sortingFunc(data, sortOptions)
+	.forEach(item => mapGarageItemsToPage(item))
 }
 
 const populateGarage = () => {
@@ -92,6 +98,14 @@ const deleteCard = id => {
 		method: "DELETE",
 		body: JSON.stringify({ newId:newId }),
 		headers: { "Content-Type":"application/json" }
+	})
+	.then(resp => resp.json())
+	.then(returnedObj => {
+		$('#newItem').empty()
+		$('#newReason').empty()
+		$('#tableCards').empty()
+
+		printGarageItems(returnedObj.data)
 	})
 	.catch(error => console.log(error) )
 }

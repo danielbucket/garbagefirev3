@@ -38,7 +38,6 @@ const printQuantities = quantityObj => {
 }
 
 const printGarageItems = (data, sortOptions) => {
-
 	if(!sortOptions) {
 		sortOptions = { toSortBy:'itemId', sort:'id' }
 	}
@@ -87,6 +86,7 @@ const postNewGarageItem = newObj => {
 
 const deleteCard = id => {
 	const newId = id.slice(5,7)
+
 	fetch('/api/v1/items/destroy', {
 		method: "DELETE",
 		body: JSON.stringify({ newId:newId }),
@@ -101,7 +101,6 @@ const repackageToSort = toSortBy => {
 
 	itemIdArray.each((i,item) => {
 		const block = $(`[id="item-${item.innerText}"]`)
-
 		const id = parseInt(block.find('#garageItemId').text())
 		const name = block.find('#itemName').text()
 		const excuse = block.find('#itemExcuse').text()

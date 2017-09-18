@@ -59,7 +59,7 @@ const printGarageItems = (data, sortOptions) => {
 }
 
 const populateGarage = () => {
-	fetch('/api/v1/items/')
+	fetch('/api/v1/items')
 	.then(resp => resp.json())
 	.then(returnValue => {
 		$('#tableCards').empty()
@@ -70,7 +70,7 @@ const populateGarage = () => {
 }
 
 const postNewGarageItem = newObj => {
-	fetch('/api/v1/items/', {
+	fetch('/api/v1/items', {
 		method: "POST",
 		body: JSON.stringify(newObj),
 		headers: { "Content-Type": "application/json"}

@@ -3,24 +3,59 @@
 <head>
 	<title>Garbage Fire</title>
 	<link rel="stylesheet" type="text/css" href="main.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 </head>
 <body>
-	<div>Garbage List</div>
-
- <section id="addNewSection">
- 		<input id="newItemInput" class="newItemInput" type="text" placeholder="what is the thing?">
- 		<input id="newItemInput" class="newItemInput"
- 		type="text" placeholder="why is it here?">
- 		<input id="1" class="conditionOption" type="radio">Sparkling</input>
- 		<input id="2" class="conditionOption" type="radio">Dusty</input>
- 		<input id="3" class="conditionOption" type="radio">Rancid</input>
- 		<button id="submitBtn">Submit</button>
- </section>
-
- <section>
- 		<div id="garageItems" class="garageItemsDisplay"></div>
-	</section>
-
+	<div id="toggleDoor">See whats inside</div>
+	<div id="closedDoor" class="door"></div>
+	<div id="garage" class="garageView">
+		<div class="table">
+			<div class="card">
+				<div class="title headerTitle" class="card">
+					<div id="itemsCount" class="counter">
+						Count: <span id="itemsCountNum"></span>
+					</div>
+					<div id="sparklyCount" class="counter">
+						Sparkly: <span id="sparklyCountNum"></span>
+					</div>
+					<div id="dustyCount" class="counter">
+						Dusty: <span id="dustyCountNum"></span>
+					</div>
+					<div id="rancidCount" class="counter">
+						Rancid: <span id="rancidCountNum"></span>
+					</div>
+				</div>
+				<input id="newItem"
+											class="title headerTitle"
+											placeholder="What it is"
+											name="input"
+											type="text"
+											/>
+				<input id="newReason"
+											class="title headerTitle"
+											placeholder="Why has it" 
+											name="input"
+											type="text"
+											/>
+				<select id="condition" class="select headerTitle">
+					<option id="1">Sparkling</option>
+					<option id="2">Dusty</option>
+					<option id="3">Rancid</option>
+				</select>
+				<button id="submitBtn" class="button headerTitle" class="title">Submit</button>
+			</div>
+		</div>
+		<div id="table" class="table saved">
+			<div class="card header">
+				<p id="itemId" class="title up">#<p>
+				<p id="itemTitle" class="title">What<p>
+				<p id="itemReason" class="title">Reason<p>
+				<p id="itemCondition" class="title">Condition<p>
+				<p class="title">Action</p>
+			</div>
+			<div id="tableCards" class="table saved"></div>
+		</div>
+	</div>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts.js"></script>
 	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>

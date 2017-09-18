@@ -12,6 +12,7 @@ exports.up = (knex, Promise) => {
  		table.increments('id').primary()
  		table.string('name')
  		table.string('excuse')
+ 		table.string('item_state')
  		table.integer('item_state_id').unsigned()
  		table.foreign('item_state_id').references('items_state.id')
 

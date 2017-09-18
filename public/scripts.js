@@ -97,9 +97,9 @@ const repackageToSort = toSortBy => {
 	}
 
 
-const updateCard = harpy => {
-	const block = $(`#${harpy}`)
-	const id = parseInt(harpy.slice(5,7))
+const updateCard = originID => {
+	const block = $(`#${originID}`)
+	const id = parseInt(originID.slice(5,7))
 	const name = block.find('#itemName')[0].innerText
 	const excuse = block.find('#itemExcuse')[0].innerText
 	const item_state = block.find('#itemCondition')[0].innerText	
@@ -133,13 +133,25 @@ const updateCard = harpy => {
 	.catch(error => console.log(error))
 }
 
+const submitBtn = () => {
+	const item = $('#newItem').val()
+	const excuse = $('#newReason').val()
+	const condition = $('#condition option:selected')[0].id
+
+	$('#newItem').val('')
+	$('#newReason').val('')
+
+	postNewGarageItem({ name:item,
+																					excuse:excuse,
+																					item_state_id:condition })
+}
 
 //------> ACTIONS <------//
 
 $('#table').on('click', '#itemName', function() {
-	$(this).attr('contenteditable', 'true')
+	$(this).attr('contenteditable', 'true');
 	$(this).siblings('#deleteBtn')[0].innerText = 'Update';
-	$(this).siblings('#deleteBtn').addClass('update')
+	$(this).siblings('#deleteBtn').addClass('update');
 })
 
 $('#table').on('click', '#itemExcuse', function() {
@@ -153,11 +165,9 @@ $('#toggleDoor').on('click', () => {
 })
 
 $('#submitBtn').on('click', () => {
-	const item = $('#newItem').val()
-	const excuse = $('#newReason').val()
-	const condition = $('#condition option:selected')[0].id
-	postNewGarageItem({ name:item,excuse:excuse,item_state_id:condition })
+	submitBtn()
 })
+
 
 $('#table').on('click', '#deleteBtn', function() {
 	const id = $(this).parents('.card').attr('id')

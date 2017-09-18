@@ -20,9 +20,6 @@ app.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname + '/../public/index.html'))
 })
 
-
-
-
 // DELETE ITEM FROM DB
 app.delete('/api/v1/items/destroy', (req, res) => {
 	const id = req.body.newId;

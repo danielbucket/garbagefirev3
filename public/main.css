@@ -85,7 +85,16 @@ body {
 .headerTitle {
 	width: 20%;
 	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	font-size: 10px;
+}
 
+.counter {
+	width: 50%;
+	border: .25px solid #f2f2f2;
 }
 
 .title, .description {

@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 // DELETE ITEM FROM DB
 app.delete('/api/v1/items/destroy', (req, res) => {
 	const id = req.body.newId;
-	
+
 	db('items').where('id', id)
 	.del()
 	.then(() => res.status(202).json({
@@ -51,6 +51,16 @@ app.get('/api/v1/itemstate/:id', (req,res) => {
 		res.status(200).json({ stateID })
 	})
 })
+
+app.get('/api/v1/cleanliness/:cleanliness', (req,res) => {
+	const cleanliness = req.params.cleanliness;
+
+	db('items_state').where('cleanliness', cleanliness)
+	.select('id')
+	.then(id => res.status(200).json({ id }))
+	.catch(error => res.status(500).json({ error }))
+})
+
 
 //	GET ITEMS BY NAME
 app.get('/api/v1/items/:name', (req,res) => {

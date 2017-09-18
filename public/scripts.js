@@ -71,7 +71,7 @@ const deleteCard = id => {
 		body: JSON.stringify({ newId }),
 		headers: { "Content-Type":"application/json" }
 	})
-	.catch(error => {console.log(error)})
+	.catch(error => console.log(error) )
 }
 
 const repackageToSort = toSortBy => {
@@ -97,9 +97,56 @@ const repackageToSort = toSortBy => {
 	}
 
 
+const updateCard = harpy => {
+	const block = $(`#${harpy}`)
+	const id = parseInt(harpy.slice(5,7))
+	const name = block.find('#itemName')[0].innerText
+	const excuse = block.find('#itemExcuse')[0].innerText
+	const item_state = block.find('#itemCondition')[0].innerText	
+
+	fetch(`/api/v1/cleanliness/${item_state}`)
+	.then(resp => resp.json())
+	.then(cleanlinessID => {
+
+		const PUTnewData = {
+			id:id,
+			replaceWith: {
+				name:name,
+				excuse:excuse,
+				item_state:item_state,
+				item_state_id: cleanlinessID.id[0].id
+			}
+		}
+
+		fetch('/api/v1/items', {
+			method: "PUT",
+			body: JSON.stringify(PUTnewData),
+			headers: { "Content-Type":"application/json" }
+		})
+		.then(resp => resp.json())
+		.then(data => {
+			$('#tableCards').empty()
+			printGarageItems(data.data)
+		})
+		.catch(error => console.log(error))
+	})
+	.catch(error => console.log(error))
+}
 
 
 //------> ACTIONS <------//
+
+$('#table').on('click', '#itemName', function() {
+	$(this).attr('contenteditable', 'true')
+	$(this).siblings('#deleteBtn')[0].innerText = 'Update';
+	$(this).siblings('#deleteBtn').addClass('update')
+})
+
+$('#table').on('click', '#itemExcuse', function() {
+	$(this).attr('contenteditable', 'true')
+	$(this).siblings('#deleteBtn')[0].innerText = 'Update';
+	$(this).siblings('#deleteBtn').addClass('update')
+})
 
 $('#toggleDoor').on('click', () => {
 	$('#closedDoor').toggleClass('door', 'doorAction')
@@ -114,7 +161,13 @@ $('#submitBtn').on('click', () => {
 
 $('#table').on('click', '#deleteBtn', function() {
 	const id = $(this).parents('.card').attr('id')
-	deleteCard(id)
+	const cardToUpdate = $(this).parents('.card')[0]
+
+	if($(this).hasClass('update')) {
+		return updateCard(id)
+	}
+
+		deleteCard(id)
 	$(this).parents().remove('.card')
 })
 

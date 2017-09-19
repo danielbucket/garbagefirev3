@@ -9,10 +9,10 @@ const mapGarageItemsToPage = data => {
 	$('#tableCards').append(
 		`
 		<div id="item-${data.id}" class="card">
-			<p id="garageItemId" class="description">${data.id}</p> 
-			<p id="itemName" class="description">${data.name}</p>
-			<p id="itemExcuse" class="description overflow">${data.excuse}<p>
-			<p id="itemCondition" class="description">${data.item_state}</p>
+			<p id="garageItemId" class="dataField description">${data.id}</p> 
+			<p id="itemName" class="dataField description">${data.name}</p>
+			<p id="itemExcuse" class="dataField description overflow">${data.excuse}<p>
+			<p id="itemCondition" class="dataField description">${data.item_state}</p>
 			<button class="description button" id="deleteBtn">Delete</button>
 		</div>
 		`

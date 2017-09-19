@@ -6,10 +6,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 </head>
 <body>
+
 	<div id="garage" class="garageView">
-
 				<div class="headerTitle" class="card">
-
 					<div id="itemsCount" class="counter">
 						Count:<span class="num" id="itemsCountNum"></span>
 					</div>
@@ -22,11 +21,9 @@
 					<div id="rancidCount" class="counter">
 						Rancid:<span class="num" id="rancidCountNum"></span>
 					</div>
-
 				</div>
 
 			<div class="inputContainer">
-
 				<p class="label">Name</p>
 				<input id="newItem"
 											class="formItem"
@@ -49,23 +46,21 @@
 				</select>
 				<button id="submitBtn" class="button formItem" class="title">Submit</button>
 			</div>
-
-		<div class="table">
-			
+		<div class="cardHeader">
+			<p id="itemId" class="title up">#<p>
+			<p id="itemTitle" class="title">What<p>
+			<p id="itemReason" class="title">Reason<p>
+			<p id="itemCondition" class="title">Condition<p>
+			<p class="title">Action</p>
 		</div>
 
-		<div id="table" class="table saved">
-			<div class="card header">
-				<p id="itemId" class="title up">#<p>
-				<p id="itemTitle" class="title">What<p>
-				<p id="itemReason" class="title">Reason<p>
-				<p id="itemCondition" class="title">Condition<p>
-				<p class="title">Action</p>
+			<div id="table" class="">
+				<div id="tableCards" class="table"></div>
 			</div>
-			<div id="tableCards" class="table saved"></div>
-		</div>
 		
 	</div>
+
+
 
 
 		<div id="toggleDoor" class="door"/>

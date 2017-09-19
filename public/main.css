@@ -4,32 +4,35 @@
 }
 
 body {
-	background-color: rgba(158, 158, 158, .7);
+	background-color: #f2f2f2;
 	max-height: 600px;
 }
 
 
 .garageView {
 	height: 600px;
-	width: 100%;
-	border: 1px solid black;
+	width: 90%;
+	margin: 100px auto 0 auto;
 	overflow-y: scroll;
 }
 
 .door {
 	position: absolute;
-	z-index: 9;
+	top: 0;
+	left: 0;
+	z-index: 100;
 	display: block;
-	width: 100%;
-	height: 600px;
-	background-color: rgba(107, 109, 104, 0.94);
-	border: 1px solid black;
-	/*-webkit-transform: translateY(-900px);*/
+	width: 100vw;
+	height: 100%;
+	background: url('../assets/garageDoor.png') no-repeat center;
+	background-color: #f2f2f2;
+	transition: all 2s ease;
 }
 
-.doorAction {
-	
+.openDoor {
+	transform: translateY(-95%)
 }
+
 
 #toggleDoor {
 	display: absolute;
@@ -77,23 +80,48 @@ body {
 	height: 40px;
 	display: flex;
 	flex-direction: row;
-	margin: 0 auto;
-	border-bottom: .75px solid #fff;
+	margin: auto;
+	margin-bottom: 30px;
+	border-bottom: .75px solid black;
 }
 
 .headerTitle {
-	width: 20%;
+	width: 60%;
+	height: 40px;
+	margin: auto;
+	text-align: center;
+	padding-top: 10px;
+	margin-bottom: 20px;
 	background-color: #fff;
 	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: center;
-	font-size: 10px;
+	justify-content: space-around;
+	font-size: 18px;
 }
 
-.counter {
+.inputContainer {
+	border: 3px solid #4f3f39;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
 	width: 50%;
-	border: .25px solid #f2f2f2;
+	margin: auto;
+	margin-bottom: 30px;
+	padding: 15px;
+}
+
+.formItem {
+	margin: 5px;
+	height: 32px;
+	font-size: 16px;
+	padding-left: 10px;
+}
+
+.label {
+	margin: 10px 0 3px 7px;
+}
+
+.num {
+	margin-left: 6px;
 }
 
 .title, .description {

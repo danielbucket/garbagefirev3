@@ -6,45 +6,54 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
 </head>
 <body>
-	<div id="toggleDoor">See whats inside</div>
-	<div id="closedDoor" class="door"></div>
 	<div id="garage" class="garageView">
-		<div class="table">
-			<div class="card">
-				<div class="title headerTitle" class="card">
+
+				<div class="headerTitle" class="card">
+
 					<div id="itemsCount" class="counter">
-						Count: <span id="itemsCountNum"></span>
+						Count:<span class="num" id="itemsCountNum"></span>
 					</div>
 					<div id="sparklyCount" class="counter">
-						Sparkly: <span id="sparklyCountNum"></span>
+						Sparkly:<span class="num" id="sparklyCountNum"></span>
 					</div>
 					<div id="dustyCount" class="counter">
-						Dusty: <span id="dustyCountNum"></span>
+						Dusty:<span class="num" id="dustyCountNum"></span>
 					</div>
 					<div id="rancidCount" class="counter">
-						Rancid: <span id="rancidCountNum"></span>
+						Rancid:<span class="num" id="rancidCountNum"></span>
 					</div>
+
 				</div>
+
+			<div class="inputContainer">
+
+				<p class="label">Name</p>
 				<input id="newItem"
-											class="title headerTitle"
+											class="formItem"
 											placeholder="What it is"
 											name="input"
 											type="text"
 											/>
+											<p class="label">Reason for Storing</p>
 				<input id="newReason"
-											class="title headerTitle"
+											class="formItem"
 											placeholder="Why has it" 
 											name="input"
 											type="text"
 											/>
-				<select id="condition" class="select headerTitle">
+				<p class="label">Choose Level of Cleanliness</p>
+				<select id="condition" class="select formItem">
 					<option id="1">Sparkling</option>
 					<option id="2">Dusty</option>
 					<option id="3">Rancid</option>
 				</select>
-				<button id="submitBtn" class="button headerTitle" class="title">Submit</button>
+				<button id="submitBtn" class="button formItem" class="title">Submit</button>
 			</div>
+
+		<div class="table">
+			
 		</div>
+
 		<div id="table" class="table saved">
 			<div class="card header">
 				<p id="itemId" class="title up">#<p>
@@ -55,7 +64,12 @@
 			</div>
 			<div id="tableCards" class="table saved"></div>
 		</div>
+		
 	</div>
+
+
+		<div id="toggleDoor" class="door"/>
+
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts.js"></script>
 	<script type="text/javascript" src="jquery-3.2.1.min.js"></script>

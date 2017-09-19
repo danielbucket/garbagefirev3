@@ -177,10 +177,6 @@ const submitBtn = () => {
 
 //------> ACTIONS <------//
 
-// $('#closedDoor').on('click', function(){
-// 	$(this).addClass('openDoor')
-// })
-
 $('#table').on('click', '#itemName', function() {
 	$(this).attr('contenteditable', 'true');
 	$(this).siblings('#deleteBtn')[0].innerText = 'Update';
@@ -201,7 +197,7 @@ $('#submitBtn').on('click', () => {
 	submitBtn()
 })
 
-$('#table').on('click', '#deleteBtn', function() {
+$('#tableCards').on('click', '#deleteBtn', function() {
 	const id = $(this).parents('.card').attr('id')
 	const cardToUpdate = $(this).parents('.card')[0]
 
